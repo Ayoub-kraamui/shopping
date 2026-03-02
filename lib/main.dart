@@ -75,7 +75,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => CartBloc()),
         ],
         child: MaterialApp(
-          title: 'Mini Store',
+          title: 'تسوق',
           debugShowCheckedModeBanner: false,
           theme: AppTheme.darkTheme,
           localizationsDelegates: const [
