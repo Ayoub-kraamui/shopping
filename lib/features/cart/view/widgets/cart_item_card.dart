@@ -57,16 +57,6 @@ class CartItemCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        context.read<CartBloc>().add(CartItemRemoved(item));
-                      },
-                      child: const Icon(
-                        Icons.delete_outline,
-                        color: Colors.redAccent,
-                        size: 22,
-                      ),
-                    ),
                   ],
                 ),
                 const SizedBox(height: 6),
@@ -108,6 +98,17 @@ class CartItemCard extends StatelessWidget {
                       onTap: () {
                         context.read<CartBloc>().add(CartItemIncremented(item));
                       },
+                    ),
+                    SizedBox(width: 50),
+                    GestureDetector(
+                      onTap: () {
+                        context.read<CartBloc>().add(CartItemRemoved(item));
+                      },
+                      child: const Icon(
+                        Icons.delete_outline,
+                        color: Colors.redAccent,
+                        size: 25,
+                      ),
                     ),
                   ],
                 ),
