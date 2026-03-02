@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/home_bloc.dart';
 import '../../bloc/home_state.dart';
 import '../../../../core/constant/colors.dart';
-//import '../../../profile/view/screen/profile_screen.dart';
+import '../../../profile/view/screen/profile_screen.dart';
 import '../widgets/home_main_view.dart';
 import '../widgets/home_bottom_nav.dart';
 
@@ -45,8 +45,8 @@ class HomeScreen extends StatelessWidget {
             style: TextStyle(fontSize: 24, color: Colors.white),
           ),
         );
-      // case 3:
-      //   return const ProfileScreen();
+      case 3:
+        return const ProfileScreen();
       default:
         return const SizedBox.shrink();
     }

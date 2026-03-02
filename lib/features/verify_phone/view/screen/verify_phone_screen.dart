@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/verify_phone_bloc.dart';
 import '../../bloc/verify_phone_event.dart';
 import '../../bloc/verify_phone_state.dart';
-//import '../../../home/view/screen/home_screen.dart';
+import '../../../home/view/screen/home_screen.dart';
 import '../widgets/verify_phone_header.dart';
 import '../widgets/otp_input_fields.dart';
 import '../widgets/resend_otp_section.dart';
@@ -113,11 +113,11 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
     }
 
     if (state.isSuccess) {
-      // Navigator.pushAndRemoveUntil(
-      //   context,
-      //   MaterialPageRoute(builder: (_) => const HomeScreen()),
-      //   (route) => false,
-      // );
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (_) => const HomeScreen()),
+        (route) => false,
+      );
     }
   }
 

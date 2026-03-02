@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping/core/constant/colors.dart';
-//import '../../../features/auth/view/screen/login_screen.dart';
-//import '../../../features/home/view/screen/home_screen.dart';
+import 'package:shopping/features/auth/view/screen/login_screen.dart';
+import 'package:shopping/features/home/view/screen/home_screen.dart';
 import '../../bloc/splash_bloc.dart';
 import '../../bloc/splash_event.dart';
 import '../../bloc/splash_state.dart';
@@ -19,16 +19,16 @@ class SplashScreen extends StatelessWidget {
       child: BlocListener<SplashBloc, SplashState>(
         listener: (context, state) {
           if (state is SplashAuthenticated) {
-            // Navigator.of(context).pushReplacement(
-            //   MaterialPageRoute(builder: (context) => const HomeScreen()),
-            // );
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
+            );
           } else if (state is SplashUnauthenticated) {
-            // Navigator.of(context).pushReplacement(
-            //   MaterialPageRoute(
-            //     builder: (context) =>
-            //         LoginScreen(initialIsLoginTab: !state.shouldRegister),
-            //   ),
-            // );
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) =>
+                    LoginScreen(initialIsLoginTab: !state.shouldRegister),
+              ),
+            );
           }
         },
         child: Scaffold(
