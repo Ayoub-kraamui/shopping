@@ -22,16 +22,22 @@ class ProductDetailsScreen extends StatelessWidget {
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: AppColors.primaryGreen,
+            ),
             onPressed: () => Navigator.pop(context),
           ),
           actions: [
             IconButton(
-              icon: const Icon(Icons.share, color: Colors.white),
+              icon: const Icon(Icons.share, color: AppColors.primaryGreen),
               onPressed: () {},
             ),
             IconButton(
-              icon: const Icon(Icons.favorite_border, color: Colors.white),
+              icon: const Icon(
+                Icons.favorite_border,
+                color: AppColors.primaryGreen,
+              ),
               onPressed: () {},
             ),
           ],
