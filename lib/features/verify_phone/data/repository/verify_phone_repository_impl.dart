@@ -3,6 +3,8 @@ import 'verify_phone_repository.dart';
 
 class VerifyPhoneRepositoryImpl implements VerifyPhoneRepository {
   static const _kIsLoggedIn = 'is_logged_in';
+  static const _kSavedEmail = 'saved_email';
+  static const _kSavedPassword = 'saved_password';
   static const _kMockOtp = '0000'; // OTP للاختبار
 
   SharedPreferences? _prefs;
@@ -13,11 +15,16 @@ class VerifyPhoneRepositoryImpl implements VerifyPhoneRepository {
   }
 
   @override
-  Future<bool> verifyOtp(String otp) async {
+  Future<bool> verifyOtp(String otp, String email, String password) async {
     await Future.delayed(const Duration(milliseconds: 800));
     if (otp == _kMockOtp) {
       final prefs = await _sharedPrefs;
-      await prefs.setBool(_kIsLoggedIn, true);
+      // ← حفظ بيانات الحساب بعد التحقق الناجح من رقم الهاتف
+      await Future.wait([
+        prefs.setString(_kSavedEmail, email),
+        prefs.setString(_kSavedPassword, password),
+        prefs.setBool(_kIsLoggedIn, true),
+      ]);
       return true;
     }
     return false;

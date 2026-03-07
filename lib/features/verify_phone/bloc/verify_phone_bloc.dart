@@ -20,7 +20,11 @@ class VerifyPhoneBloc extends Bloc<VerifyPhoneEvent, VerifyPhoneState> {
   ) async {
     emit(state.copyWith(status: VerifyPhoneStatus.loading));
     try {
-      final success = await _verifyPhoneRepository.verifyOtp(event.otp);
+      final success = await _verifyPhoneRepository.verifyOtp(
+        event.otp,
+        event.email,
+        event.password,
+      );
       emit(
         success
             ? state.copyWith(status: VerifyPhoneStatus.success)

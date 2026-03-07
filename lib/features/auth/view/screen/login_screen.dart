@@ -6,6 +6,7 @@ import '../../bloc/auth_event.dart';
 import '../../bloc/auth_state.dart';
 import '../widgets/auth_widgets.dart';
 import '../../../../features/verify_phone/view/screen/verify_phone_screen.dart';
+import '../../../home/view/screen/home_screen.dart';
 import '../widgets/login/login_header.dart';
 import '../widgets/login/login_switcher_tabs.dart';
 import '../widgets/login/login_form.dart';
@@ -100,12 +101,12 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     if (state.isSuccess) {
-      // Navigator.pushAndRemoveUntil(
-      //   context,
-      //   MaterialPageRoute(builder: (_) => const HomeScreen()),
-      //   (route) => false,
-      // );
-      // return;
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (_) => const HomeScreen()),
+        (route) => false,
+      );
+      return;
     }
 
     if (state.isOtpSent) {
@@ -115,6 +116,8 @@ class _LoginScreenState extends State<LoginScreen> {
           builder: (_) => VerifyPhoneScreen(
             phoneNumber: state.phoneNumber ?? '',
             phoneCode: state.phoneCode ?? '',
+            email: state.pendingEmail ?? '',
+            password: state.pendingPassword ?? '',
           ),
         ),
       );

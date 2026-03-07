@@ -13,11 +13,15 @@ import '../widgets/submit_otp_button.dart';
 class VerifyPhoneScreen extends StatefulWidget {
   final String phoneCode;
   final String phoneNumber;
+  final String email;
+  final String password;
 
   const VerifyPhoneScreen({
     super.key,
     required this.phoneCode,
     required this.phoneNumber,
+    required this.email,
+    required this.password,
   });
 
   @override
@@ -64,7 +68,13 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
   void _submitOtp() {
     if (!_isOtpComplete) return;
     FocusScope.of(context).unfocus();
-    context.read<VerifyPhoneBloc>().add(VerifyPhoneOtpSubmitted(otp: _otp));
+    context.read<VerifyPhoneBloc>().add(
+      VerifyPhoneOtpSubmitted(
+        otp: _otp,
+        email: widget.email,
+        password: widget.password,
+      ),
+    );
   }
 
   void _resendOtp() {

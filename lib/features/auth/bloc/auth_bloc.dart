@@ -40,9 +40,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
               ),
       );
     } catch (e) {
-      emit(
-        state.copyWith(status: AuthStatus.error, errorMessage: e.toString()),
-      );
+      final message = e is Exception
+          ? e.toString().replaceFirst('Exception: ', '')
+          : e.toString();
+      emit(state.copyWith(status: AuthStatus.error, errorMessage: message));
     }
   }
 
@@ -62,23 +63,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     emit(state.copyWith(status: AuthStatus.loading));
     try {
-      final registered = await _authRepository.register(
-        email: event.email,
-        password: event.password,
-        phoneCode: event.phoneCode,
-        phoneNumber: event.phoneNumber,
-      );
-
-      if (!registered) {
-        emit(
-          state.copyWith(
-            status: AuthStatus.error,
-            errorMessage: 'فشل إنشاء الحساب، تحقق من البيانات',
-          ),
-        );
-        return;
-      }
-
       final otpSent = await _authRepository.loginWithPhone(
         event.phoneCode,
         event.phoneNumber,
@@ -89,6 +73,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                 status: AuthStatus.otpSent,
                 phoneNumber: event.phoneNumber,
                 phoneCode: event.phoneCode,
+                // ← حفظ البيانات مؤقتاً حتى يتم التحقق من الهاتف
+                pendingEmail: event.email,
+                pendingPassword: event.password,
               )
             : state.copyWith(
                 status: AuthStatus.error,
@@ -96,9 +83,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
               ),
       );
     } catch (e) {
-      emit(
-        state.copyWith(status: AuthStatus.error, errorMessage: e.toString()),
-      );
+      final message = e is Exception
+          ? e.toString().replaceFirst('Exception: ', '')
+          : e.toString();
+      emit(state.copyWith(status: AuthStatus.error, errorMessage: message));
     }
   }
 

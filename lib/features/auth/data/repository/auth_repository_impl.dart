@@ -22,6 +22,11 @@ class AuthRepositoryImpl implements AuthRepository {
     final savedEmail = prefs.getString(_kSavedEmail);
     final savedPassword = prefs.getString(_kSavedPassword);
 
+    // إذا لم يكن هناك حساب مسجّل بعد
+    if (savedEmail == null || savedPassword == null) {
+      throw Exception('لا يوجد حساب مسجّل، يرجى إنشاء حساب أولاً');
+    }
+
     if (email.isNotEmpty &&
         password.isNotEmpty &&
         email == savedEmail &&

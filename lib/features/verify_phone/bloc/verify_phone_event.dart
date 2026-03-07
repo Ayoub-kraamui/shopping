@@ -10,11 +10,17 @@ abstract class VerifyPhoneEvent extends Equatable {
 // إرسال رمز OTP للتحقق
 class VerifyPhoneOtpSubmitted extends VerifyPhoneEvent {
   final String otp;
+  final String email;
+  final String password;
 
-  const VerifyPhoneOtpSubmitted({required this.otp});
+  const VerifyPhoneOtpSubmitted({
+    required this.otp,
+    required this.email,
+    required this.password,
+  });
 
   @override
-  List<Object?> get props => [otp];
+  List<Object?> get props => [otp, email, password];
 }
 
 // طلب إعادة إرسال رمز OTP

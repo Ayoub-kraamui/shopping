@@ -9,6 +9,10 @@ class AuthState extends Equatable {
   final String? phoneNumber;
   final String? phoneCode;
 
+  /// بيانات التسجيل المؤقتة – تُحفظ بعد نجاح التحقق من الهاتف فقط
+  final String? pendingEmail;
+  final String? pendingPassword;
+
   final LoginUiModel uiModel;
 
   const AuthState({
@@ -16,6 +20,8 @@ class AuthState extends Equatable {
     this.errorMessage,
     this.phoneNumber,
     this.phoneCode,
+    this.pendingEmail,
+    this.pendingPassword,
     this.uiModel = const LoginUiModel(),
   });
 
@@ -29,6 +35,8 @@ class AuthState extends Equatable {
     String? errorMessage,
     String? phoneNumber,
     String? phoneCode,
+    String? pendingEmail,
+    String? pendingPassword,
     LoginUiModel? uiModel,
   }) {
     return AuthState(
@@ -38,6 +46,8 @@ class AuthState extends Equatable {
           : errorMessage ?? this.errorMessage,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       phoneCode: phoneCode ?? this.phoneCode,
+      pendingEmail: pendingEmail ?? this.pendingEmail,
+      pendingPassword: pendingPassword ?? this.pendingPassword,
       uiModel: uiModel ?? this.uiModel,
     );
   }
@@ -48,6 +58,8 @@ class AuthState extends Equatable {
     errorMessage,
     phoneNumber,
     phoneCode,
+    pendingEmail,
+    pendingPassword,
     uiModel,
   ];
 
